@@ -4,4 +4,15 @@
     <string name="addGoal">To continue add a Calorie-Goal:</string>
     <string name="goal">Enter goal</string>
     <string name="save">Save goal and continue</string>
+    <string name="goalTextViewValue">Your goal: </string>
+    <string name="alreadyConsumedViewValue">Already consumed: 0</string>
+    <string name="addConsumedCaloriesHintValue">Enter your Calories you have consumed so far.</string>
+    <string name="addCaloriesFieldHint">Add calories</string>
+    <string name="saveCalories">Add Calories</string>
+    <string name="generateRecipes">Get Recipes</string>
+    <string name="restOrChangeGoalHintValue">You want to reset your consumed calories or change your goal?</string>
+    <string name="resetRecipesButtonText">Reset calories</string>
+    <string name="orValue">Or</string>
+    <string name="editCalorieGoalHint">Change goal</string>
+    <string name="changeGoalButtonLabel">Change goal</string>
 </resources>
