@@ -49,10 +49,9 @@
                         android:id="@+id/recipePictureImageView1"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        android:src="@drawable/recipePictureSrc1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <TextView
                         android:id="@+id/recipeTitle1"
@@ -99,7 +98,6 @@
                         android:id="@+id/recipePictureImageView2"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        android:src="@drawable/recipePictureSrc2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
