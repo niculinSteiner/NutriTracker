@@ -60,9 +60,7 @@ public class RecipeActivity extends AppCompatActivity {
 
     private void doHttpRequest() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
-            upDateView(response);
-        }, error -> Log.i(TAG, "Error :" + error.toString()));
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, this::upDateView, error -> Log.i(TAG, "Error :" + error.toString()));
         requestQueue.add(stringRequest);
     }
 

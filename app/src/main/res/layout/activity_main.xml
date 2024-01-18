@@ -39,7 +39,7 @@
             android:minHeight="48dp"
             android:autofillHints="2000"
             android:hint="@string/goal"
-            android:inputType="phone" />
+            android:inputType="number" />
 
         <Button
             android:id="@+id/saveGoalButton"

@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="2000"
                 android:hint="@string/addCaloriesFieldHint"
-                android:inputType="phone"
+                android:inputType="number"
                 android:minHeight="48dp" />
 
             <Button
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="2000"
                 android:hint="@string/editCalorieGoalHint"
-                android:inputType="phone"
+                android:inputType="number"
                 android:minHeight="48dp" />
 
             <Button

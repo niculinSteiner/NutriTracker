@@ -56,7 +56,6 @@ public class TrackActivity extends AppCompatActivity {
             TextView goal = findViewById(R.id.goalTextView);
             EditText textField = (EditText) findViewById(R.id.editCalorieGoalField);
             goal.setText(textField.getText());
-            saveGoal();
         });
     }
 
@@ -90,7 +89,6 @@ public class TrackActivity extends AppCompatActivity {
         int goal = Integer.parseInt(intent.getExtras().getString(START_GOAL_KEY));
         TextView view = findViewById(R.id.goalTextView);
         view.setText(String.valueOf(goal));
-        saveGoal();
     }
 
     private void save(){
@@ -104,32 +102,11 @@ public class TrackActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void saveGoal(){
-        SharedPreferences preferences = getSharedPreferences("goal", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        TextView goal = (TextView) findViewById(R.id.goalTextView);
-        int goalAsInt = Integer.parseInt(goal.getText().toString());
-        editor.putString("currentStateOfGoal", String.valueOf(goalAsInt));
-
-        editor.apply();
-    }
-
     private void restore() {
         SharedPreferences preferences = getSharedPreferences("calorie", Context.MODE_PRIVATE);
 
         String savedAmount = preferences.getString("currentStateOfAlreadyConsumed", "0");
         TextView alreadyConsumed = (TextView) findViewById(R.id.alreadyConsumedTextView);
         alreadyConsumed.setText(String.valueOf(savedAmount));
-
-        restoreGoal();
-
-    }
-
-    private void restoreGoal() {
-        SharedPreferences preferences = getSharedPreferences("goal", Context.MODE_PRIVATE);
-        String savedAmount2 = preferences.getString("currentStateOfGoal", "0");
-        TextView goal = (TextView) findViewById(R.id.goalTextView);
-        goal.setText(String.valueOf(savedAmount2));
     }
 }
