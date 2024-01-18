@@ -1,5 +1,7 @@
 package com.niculin.nutritracker;
 
+import static com.niculin.nutritracker.RecipeActivity.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,6 +27,15 @@ public class TrackActivity extends AppCompatActivity {
         setActionListenerToAddCalories();
         setActionListenerToResetCalories();
         setActionListenerToEditCalorieGoal();
+        Button generateRecipes = findViewById(R.id.generateRecipesButton);
+        generateRecipes.setOnClickListener(v -> {
+            TextView goal = (TextView) findViewById(R.id.goalTextView);
+            TextView caloriesSoFar = (TextView) findViewById(R.id.alreadyConsumedTextView);
+            Intent intentToRecipes = new Intent(this, RecipeActivity.class);
+            intentToRecipes.putExtra(START_GOAL_KEY, goal.getText().toString());
+            intentToRecipes.putExtra(ACTUAL_CALORIES_KEY, caloriesSoFar.getText().toString());
+            this.startActivity(intentToRecipes);
+        });
     }
 
     private void setActionListenerToEditCalorieGoal() {
