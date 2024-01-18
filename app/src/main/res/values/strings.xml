@@ -15,4 +15,9 @@
     <string name="orValue">Or</string>
     <string name="editCalorieGoalHint">Change goal</string>
     <string name="changeGoalButtonLabel">Change goal</string>
+    <string name="recipeTitleValue">Your recipes proposals</string>
+    <string name="no_recipe_found">No recipe found</string>
+    <string name="no_recipe_message">There was no Recipe found for your calorie difference.</string>
+    <string name="no_recipe_found2">No recipe found.</string>
+    <string name="goBack">Back to Tracking</string>
 </resources>
