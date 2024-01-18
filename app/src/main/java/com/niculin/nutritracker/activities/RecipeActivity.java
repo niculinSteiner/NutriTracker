@@ -31,21 +31,31 @@ public class RecipeActivity extends AppCompatActivity {
     public static final String TAG = "NotificationCompat";
     private final String url = "https://api.sampleapis.com/recipes/recipes";
 
+
+    int goal;
+    int consumedCalories;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+        Intent intent = getIntent();
+        goal = Integer.parseInt(intent.getExtras().getString(TrackActivity.GOAL_KEY));
+        consumedCalories = Integer.parseInt(intent.getExtras().getString(ACTUAL_CALORIES_KEY));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        goBackActionListener();
+        doHttpRequest();
+    }
+
+    private void goBackActionListener() {
         Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> {
-            Intent intentToTrack = new Intent(this, TrackActivity.class);
-            this.startActivity(intentToTrack);
+            finish();
         });
-        doHttpRequest();
     }
 
     private void doHttpRequest() {
@@ -104,9 +114,6 @@ public class RecipeActivity extends AppCompatActivity {
     }
 
     private List<Recipe> filterRecipes(List<Recipe> recipes) {
-        Intent intent = getIntent();
-        int goal = Integer.parseInt(intent.getExtras().getString(TrackActivity.START_GOAL_KEY));
-        int consumedCalories = Integer.parseInt(intent.getExtras().getString(ACTUAL_CALORIES_KEY));
         int difference = goal - consumedCalories;
         return recipes.stream().filter(recipe -> recipe.getCalories() <= difference).collect(Collectors.toList());
     }
