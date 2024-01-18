@@ -4,8 +4,8 @@
     <string name="addGoal">To continue add a Calorie-Goal:</string>
     <string name="goal">Enter goal</string>
     <string name="save">Save goal and continue</string>
-    <string name="goalTextViewValue">Your goal: </string>
-    <string name="alreadyConsumedViewValue">Already consumed: 0</string>
+    <string name="goalTextViewValue" />
+    <string name="alreadyConsumedViewValue" />
     <string name="addConsumedCaloriesHintValue">Enter your Calories you have consumed so far.</string>
     <string name="addCaloriesFieldHint">Add calories</string>
     <string name="saveCalories">Add Calories</string>
