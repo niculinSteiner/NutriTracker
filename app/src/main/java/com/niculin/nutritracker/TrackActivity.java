@@ -24,6 +24,15 @@ public class TrackActivity extends AppCompatActivity {
         setGoal();
         setActionListenerToAddCalories();
         setActionListenerToResetCalories();
+        setActionListenerToEditCalorieGoal();
+    }
+
+    private void setActionListenerToEditCalorieGoal() {
+        Button changeGoalButton = (Button) findViewById(R.id.changeGoalButton);
+        changeGoalButton.setOnClickListener(v -> {
+            TextView goal = findViewById(R.id.goalTextView);
+            goal.setText(((EditText) findViewById(R.id.editCalorieGoalField)).getText());
+        });
     }
 
     private void setActionListenerToResetCalories() {
