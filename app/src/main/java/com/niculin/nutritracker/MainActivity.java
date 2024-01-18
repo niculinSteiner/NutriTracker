@@ -1,6 +1,6 @@
 package com.niculin.nutritracker;
 
-import static com.niculin.nutritracker.TrackActivity.START_GOAL_KEY;
+import static com.niculin.nutritracker.activities.TrackActivity.START_GOAL_KEY;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.niculin.nutritracker.activities.TrackActivity;
 
 public class MainActivity extends AppCompatActivity {
 

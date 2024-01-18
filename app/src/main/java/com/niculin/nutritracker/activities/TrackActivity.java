@@ -1,14 +1,19 @@
-package com.niculin.nutritracker;
+package com.niculin.nutritracker.activities;
 
-import static com.niculin.nutritracker.RecipeActivity.*;
+import static com.niculin.nutritracker.activities.RecipeActivity.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.niculin.nutritracker.R;
+import com.niculin.nutritracker.activities.RecipeActivity;
 
 public class TrackActivity extends AppCompatActivity {
 
@@ -18,6 +23,7 @@ public class TrackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track);
+        restore();
     }
 
     @Override
@@ -27,6 +33,10 @@ public class TrackActivity extends AppCompatActivity {
         setActionListenerToAddCalories();
         setActionListenerToResetCalories();
         setActionListenerToEditCalorieGoal();
+        setActionListenerToGenerateRecipesButton();
+    }
+
+    private void setActionListenerToGenerateRecipesButton() {
         Button generateRecipes = findViewById(R.id.generateRecipesButton);
         generateRecipes.setOnClickListener(v -> {
             TextView goal = (TextView) findViewById(R.id.goalTextView);
@@ -52,6 +62,7 @@ public class TrackActivity extends AppCompatActivity {
             TextView caloriesSoFar = findViewById(R.id.alreadyConsumedTextView);
             caloriesSoFar.setText("0");
         });
+        saveAlreadyConsumed();
     }
 
     private void setActionListenerToAddCalories() {
@@ -66,14 +77,31 @@ public class TrackActivity extends AppCompatActivity {
                 int caloriesSoFar = Integer.parseInt(caloriesScore.getText().toString());
                 caloriesScore.setText(String.valueOf(caloriesSoFar + caloriesToAddAsInt));
             }
+            saveAlreadyConsumed();
         });
     }
 
-
-    protected void setGoal() {
+    private void setGoal() {
         Intent intent = getIntent();
         int goal = Integer.parseInt(intent.getExtras().getString(START_GOAL_KEY));
         TextView view = findViewById(R.id.goalTextView);
         view.setText(String.valueOf(goal));
+    }
+
+    private void saveAlreadyConsumed(){
+        SharedPreferences preferences = getSharedPreferences("currentStateOfAlreadyConsumed", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        TextView alreadyConsumed = (TextView) findViewById(R.id.alreadyConsumedTextView);
+        int alreadyConsumedAsInt = Integer.parseInt(alreadyConsumed.getText().toString());
+        editor.putString("currentStateOfAlreadyConsumed", String.valueOf(alreadyConsumedAsInt));
+        editor.apply();
+    }
+
+    private void restore() {
+        SharedPreferences preferences = getSharedPreferences("currentStateOfAlreadyConsumed", Context.MODE_PRIVATE);
+        String savedAmount = preferences.getString("currentStateOfAlreadyConsumed", "0");
+        TextView alreadyConsumed = (TextView) findViewById(R.id.alreadyConsumedTextView);
+        alreadyConsumed.setText(String.valueOf(savedAmount));
+
     }
 }
