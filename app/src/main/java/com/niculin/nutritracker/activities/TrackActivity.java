@@ -1,6 +1,5 @@
 package com.niculin.nutritracker.activities;
 
-import static com.niculin.nutritracker.MainActivity.IS_FIRST_TIME;
 import static com.niculin.nutritracker.activities.RecipeActivity.ACTUAL_CALORIES_KEY;
 
 import android.content.Context;
