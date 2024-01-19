@@ -1,5 +1,6 @@
 package com.niculin.nutritracker.activities;
 
+import static com.niculin.nutritracker.services.JsonResponseMapper.mapRecipeResponse;
 import static com.niculin.nutritracker.services.RecipeFilterService.filterRecipesByCalorieDifference;
 
 import android.content.Intent;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niculin.nutritracker.R;
 import com.niculin.nutritracker.domain.Recipe;
 import com.niculin.nutritracker.services.ImageLoader;
+import com.niculin.nutritracker.services.JsonResponseMapper;
 
 import java.util.List;
 import java.util.Random;
@@ -71,7 +73,7 @@ public class RecipeActivity extends AppCompatActivity {
     }
 
     private void upDateView(String response) {
-        List<Recipe> allRecipes = mapResponse(response);
+        List<Recipe> allRecipes = mapRecipeResponse(response);
         List<Recipe> filteredRecipes = filterRecipesByCalorieDifference(allRecipes, goal, consumedCalories);
         Recipe recipe1 = null;
         if (!filteredRecipes.isEmpty()) {
@@ -102,17 +104,5 @@ public class RecipeActivity extends AppCompatActivity {
         String photoUrlString = recipe.getPhotoUrl();
         ImageLoader.loadImage(this, photoUrlString, imageView);
 
-    }
-
-    private static List<Recipe> mapResponse(String response) {
-        List<Recipe> allRecipes;
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            allRecipes = mapper.readValue(response, new TypeReference<List<Recipe>>() {
-            });
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        return allRecipes;
     }
 }
