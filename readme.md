@@ -12,4 +12,4 @@ Ich habe checkstyle verwendet, mit dem originale checkstyle plugin in android st
 
 #### Setup
 
-Ich habe mit dem Emulater und einem physischen Phone gearbeitet und getestet. Der Emulater war ein Pixel 3A API 34 mit android 14. Das physische war ein Google Pixel 4 mit android 14.
+Ich habe mit dem Emulater und einem physischen Phone gearbeitet und getestet. Der Emulater war ein Pixel 3A API 34 mit android 14. Das physische war ein Google Pixel 4 mit android 13.
