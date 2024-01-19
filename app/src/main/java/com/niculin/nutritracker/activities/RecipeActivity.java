@@ -1,6 +1,6 @@
 package com.niculin.nutritracker.activities;
 
-import static com.niculin.nutritracker.services.RecipeFilter.filterRecipesByCalorieDifference;
+import static com.niculin.nutritracker.services.RecipeFilterService.filterRecipesByCalorieDifference;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,11 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niculin.nutritracker.R;
 import com.niculin.nutritracker.domain.Recipe;
 import com.niculin.nutritracker.services.ImageLoader;
-import com.niculin.nutritracker.services.RecipeFilter;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class RecipeActivity extends AppCompatActivity {
 
