@@ -24,6 +24,7 @@ public class TrackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track);
+        setGoal();
         restore();
     }
 
@@ -31,7 +32,6 @@ public class TrackActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         restore();
-        setGoal();
         setActionListenerToAddCalories();
         setActionListenerToResetCalories();
         setActionListenerToEditCalorieGoal();
@@ -55,7 +55,7 @@ public class TrackActivity extends AppCompatActivity {
         changeGoalButton.setOnClickListener(v -> {
             TextView goal = findViewById(R.id.goalTextView);
             goal.setText(((EditText) findViewById(R.id.editCalorieGoalField)).getText());
-
+            saveGoal();
         });
     }
 
@@ -89,6 +89,7 @@ public class TrackActivity extends AppCompatActivity {
         int goal = Integer.parseInt(intent.getExtras().getString(START_GOAL_KEY));
         TextView view = findViewById(R.id.goalTextView);
         view.setText(String.valueOf(goal));
+        saveGoal();
     }
 
     private void save(){
@@ -102,11 +103,28 @@ public class TrackActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    private void saveGoal() {
+        SharedPreferences preferences = getSharedPreferences("goal", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        TextView goal = (TextView) findViewById(R.id.goalTextView);
+        int alreadyConsumedAsInt = Integer.parseInt(goal.getText().toString());
+        editor.putString("currentStateOfGoal", String.valueOf(alreadyConsumedAsInt));
+
+        editor.apply();
+    }
+
     private void restore() {
         SharedPreferences preferences = getSharedPreferences("calorie", Context.MODE_PRIVATE);
 
         String savedAmount = preferences.getString("currentStateOfAlreadyConsumed", "0");
         TextView alreadyConsumed = (TextView) findViewById(R.id.alreadyConsumedTextView);
         alreadyConsumed.setText(String.valueOf(savedAmount));
+
+        SharedPreferences preferences2 = getSharedPreferences("goal", Context.MODE_PRIVATE);
+
+        String savedAmount2 = preferences2.getString("currentStateOfGoal", "0");
+        TextView alreadyConsumed2 = (TextView) findViewById(R.id.goalTextView);
+        alreadyConsumed2.setText(String.valueOf(savedAmount2));
     }
 }
