@@ -1,5 +1,11 @@
 plugins {
     id("com.android.application")
+    id("checkstyle")
+}
+
+checkstyle {
+    toolVersion = "8.42"
+    configFile = file("${rootProject.projectDir}/config/checkstyle.xml")
 }
 
 android {

@@ -17,13 +17,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niculin.nutritracker.R;
 import com.niculin.nutritracker.domain.Recipe;
 import com.niculin.nutritracker.services.ImageLoader;
-import com.niculin.nutritracker.services.JsonResponseMapper;
 
 import java.util.List;
 import java.util.Random;
