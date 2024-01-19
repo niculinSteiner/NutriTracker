@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -22,7 +23,6 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, BackgroundService.class);
         PendingIntent startServicePendingIntent = PendingIntent.getService(MainActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis() + 1000 * 30);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60, startServicePendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime() + 1000 * 60, 1000 * 60, startServicePendingIntent);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Button saveButton = (Button)findViewById(R.id.saveGoalButton);
+        Button saveButton = (Button) findViewById(R.id.saveGoalButton);
         saveButton.setOnClickListener(v -> {
             EditText goal = (EditText) findViewById(R.id.startGoalField);
             Intent intentToTrackActivity = new Intent(this, TrackActivity.class);

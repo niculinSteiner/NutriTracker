@@ -2,7 +2,6 @@ package com.niculin.nutritracker.services;
 
 import android.content.Context;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 
