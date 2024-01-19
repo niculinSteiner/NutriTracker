@@ -1,12 +1,12 @@
 package com.niculin.nutritracker.activities;
 
+import static com.niculin.nutritracker.MainActivity.IS_FIRST_TIME;
 import static com.niculin.nutritracker.activities.RecipeActivity.ACTUAL_CALORIES_KEY;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -74,7 +74,7 @@ public class TrackActivity extends AppCompatActivity {
             EditText caloriesToAdd = (EditText) findViewById(R.id.addCaloriesField);
             int caloriesToAddAsInt = Integer.parseInt(caloriesToAdd.getText().toString());
             TextView caloriesScore = (TextView) findViewById(R.id.alreadyConsumedTextView);
-            if (caloriesScore.getText().toString().isEmpty()){
+            if (caloriesScore.getText().toString().isEmpty()) {
                 caloriesScore.setText(caloriesToAdd.getText());
             } else {
                 int caloriesSoFar = Integer.parseInt(caloriesScore.getText().toString());
@@ -86,13 +86,16 @@ public class TrackActivity extends AppCompatActivity {
 
     private void setGoal() {
         Intent intent = getIntent();
+        if (intent.getExtras().getString(START_GOAL_KEY).isEmpty()){
+            return;
+        }
         int goal = Integer.parseInt(intent.getExtras().getString(START_GOAL_KEY));
         TextView view = findViewById(R.id.goalTextView);
         view.setText(String.valueOf(goal));
         saveGoal();
     }
 
-    private void save(){
+    private void save() {
         SharedPreferences preferences = getSharedPreferences("calorie", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
@@ -114,7 +117,7 @@ public class TrackActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void restore() {
+    public void restore() {
         SharedPreferences preferences = getSharedPreferences("calorie", Context.MODE_PRIVATE);
 
         String savedAmount = preferences.getString("currentStateOfAlreadyConsumed", "0");
