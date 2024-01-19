@@ -1,8 +1,6 @@
 package com.niculin.nutritracker.activities;
 
-import static com.niculin.nutritracker.activities.RecipeActivity.*;
-
-import androidx.appcompat.app.AppCompatActivity;
+import static com.niculin.nutritracker.activities.RecipeActivity.ACTUAL_CALORIES_KEY;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +10,8 @@ import android.text.Editable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.niculin.nutritracker.R;
 
@@ -54,8 +54,8 @@ public class TrackActivity extends AppCompatActivity {
         Button changeGoalButton = (Button) findViewById(R.id.changeGoalButton);
         changeGoalButton.setOnClickListener(v -> {
             TextView goal = findViewById(R.id.goalTextView);
-            EditText textField = (EditText) findViewById(R.id.editCalorieGoalField);
-            goal.setText(textField.getText());
+            goal.setText(((EditText) findViewById(R.id.editCalorieGoalField)).getText());
+
         });
     }
 

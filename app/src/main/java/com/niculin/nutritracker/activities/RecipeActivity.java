@@ -39,9 +39,7 @@ public class RecipeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        Intent intent = getIntent();
-        goal = Integer.parseInt(intent.getExtras().getString(TrackActivity.GOAL_KEY));
-        consumedCalories = Integer.parseInt(intent.getExtras().getString(ACTUAL_CALORIES_KEY));
+        getData();
     }
 
     @Override
@@ -49,6 +47,13 @@ public class RecipeActivity extends AppCompatActivity {
         super.onResume();
         goBackActionListener();
         doHttpRequest();
+        getData();
+    }
+
+    private void getData() {
+        Intent intent = getIntent();
+        goal = Integer.parseInt(intent.getExtras().getString(TrackActivity.GOAL_KEY));
+        consumedCalories = Integer.parseInt(intent.getExtras().getString(ACTUAL_CALORIES_KEY));
     }
 
     private void goBackActionListener() {
