@@ -1,5 +1,7 @@
 package com.niculin.nutritracker.activities;
 
+import static com.niculin.nutritracker.services.RecipeFilter.filterRecipesByCalorieDifference;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niculin.nutritracker.R;
 import com.niculin.nutritracker.domain.Recipe;
 import com.niculin.nutritracker.services.ImageLoader;
+import com.niculin.nutritracker.services.RecipeFilter;
 
 import java.util.List;
 import java.util.Random;
@@ -28,12 +31,11 @@ import java.util.stream.Collectors;
 public class RecipeActivity extends AppCompatActivity {
 
     public static final String ACTUAL_CALORIES_KEY = "actual_calorie";
-    public static final String TAG = "NotificationCompat";
-    private final String url = "https://api.sampleapis.com/recipes/recipes";
+    private static final String TAG = "NotificationCompat";
 
 
-    int goal;
-    int consumedCalories;
+    private int goal;
+    private int consumedCalories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +67,14 @@ public class RecipeActivity extends AppCompatActivity {
 
     private void doHttpRequest() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String url = "https://api.sampleapis.com/recipes/recipes";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, this::upDateView, error -> Log.i(TAG, "Error :" + error.toString()));
         requestQueue.add(stringRequest);
     }
 
     private void upDateView(String response) {
-        List<Recipe> allRecipes;
-        allRecipes = mapResponse(response);
-        List<Recipe> filteredRecipes = filterRecipes(allRecipes);
+        List<Recipe> allRecipes = mapResponse(response);
+        List<Recipe> filteredRecipes = filterRecipesByCalorieDifference(allRecipes, goal, consumedCalories);
         Recipe recipe1 = null;
         if (!filteredRecipes.isEmpty()) {
             recipe1 = filteredRecipes.get(new Random().nextInt(filteredRecipes.size()));
@@ -115,10 +117,4 @@ public class RecipeActivity extends AppCompatActivity {
         }
         return allRecipes;
     }
-
-    private List<Recipe> filterRecipes(List<Recipe> recipes) {
-        int difference = goal - consumedCalories;
-        return recipes.stream().filter(recipe -> recipe.getCalories() <= difference && recipe.getCalories() != 0).collect(Collectors.toList());
-    }
-
 }

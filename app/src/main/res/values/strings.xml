@@ -20,4 +20,6 @@
     <string name="no_recipe_message">There was no Recipe found for your calorie difference.</string>
     <string name="no_recipe_found2">No recipe found.</string>
     <string name="goBack">Back to Tracking</string>
+    <string name="goalTextViewLabel">Goal:</string>
+    <string name="allReadyConsumedLabel">Consumed:</string>
 </resources>
