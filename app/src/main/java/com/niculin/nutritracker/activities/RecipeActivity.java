@@ -118,7 +118,7 @@ public class RecipeActivity extends AppCompatActivity {
 
     private List<Recipe> filterRecipes(List<Recipe> recipes) {
         int difference = goal - consumedCalories;
-        return recipes.stream().filter(recipe -> recipe.getCalories() <= difference).collect(Collectors.toList());
+        return recipes.stream().filter(recipe -> recipe.getCalories() <= difference && recipe.getCalories() != 0).collect(Collectors.toList());
     }
 
 }
